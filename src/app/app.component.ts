@@ -9,15 +9,17 @@ import { Subject } from "rxjs";
 })
 export class AppComponent {
   title = "demo-app";
-  // card_datas: card_data[] = [
-  //   new card_data(
-  //     'Maths','12 std mathematics','http://www.clipartroo.com/images/7/scientist-clipart-7718.png','tag 1','science','english','me','Image',
-  //   ),  new card_data(
-  //     'English','12 std english','http://www.clipartroo.com/images/7/scientist-clipart-7718.png','tag 2','Commerce','Hindi','you','Video',
-  //   ),
-  // ];
-  filterApplied: boolean = false;
+  card_datas: card_data[] = [
+    new card_data(
+      'Maths','12 std mathematics','http://www.clipartroo.com/images/7/scientist-clipart-7718.png','tag 1','science','english','me','Image',
+    ),  new card_data(
+      'English','12 std english','http://www.clipartroo.com/images/7/scientist-clipart-7718.png','tag 2','Commerce','Hindi','you','Video',
+    ),
+  ];
 
+  ngOnInit(){}
+
+  filterApplied: boolean = false;
   File_type = [
     { name: "image", id: "1", htmlId: "image1" },
     { name: "video", id: "2", htmlId: "video1" },
@@ -109,6 +111,18 @@ export class AppComponent {
       tag: ["tag-1", "tag-2", "tag-3"],
       imagePath: "https://dummyimage.com/vga",
       id: "6"
+    },
+    {
+      name: "Business",
+      author: "",
+      Language: "English",
+      description:
+        "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+      category: "level 1",
+      file_type: "video",
+      tag: ["tag-1", "tag-2", "tag-3"],
+      imagePath: "https://dummyimage.com/vga",
+      id: "7"
     }
   ];
 
@@ -129,6 +143,8 @@ export class AppComponent {
     this.filter_value_subj = subj.name;
     console.log(this.subject_filter_array);
 
+    this.filterApplied = true;
+
     if (this.subjectName_boolean) {
       // call function
       // pushing data into the array filterskill
@@ -137,7 +153,18 @@ export class AppComponent {
       // calling the function
       // deleting data from the array filterskill
       this.onFilterSubjectPop();
+
     }
+
+    console.log('before filter skill');
+    console.log(this.filterSkill);
+    console.log('after filter skill');
+
+    if(this.filterSkill.length === 0){
+      this.filterApplied = false;
+      console.log("reest");
+    }
+
   }
 
   onFilterSubjectPush() {
@@ -159,7 +186,7 @@ export class AppComponent {
 
     for (var i = 0; i<this.filterSkill.length; i++) {
       for (var j = 0; j < data_filter_pop.length; j++) {
-        
+
         if(this.filterSkill[i].id == data_filter_pop[j].id){
           this.filterSkill.splice(i,1);
           console.log(this.filterSkill);
@@ -184,10 +211,14 @@ auth;
 filterSkill2 = [];
 
 authorName(auth) {
-  console.log(auth.name);
-  this.author_filter_array.push(auth.name);
+  // console.log("before");
+  // console.log(auth.name);
+  // console.log("after");
+  // this.author_filter_array.push(auth.name);
   this.filter_value_auth = auth.name;
-  console.log(this.author_filter_array);
+  // // console.log(this.author_filter_array);
+
+  this.filterApplied = true;
 
   if (this.authorName_boolean) {
     // call function
@@ -197,32 +228,57 @@ authorName(auth) {
     // calling the function
     // deleting data from the array filterskill
     this.onFilterAuthorPop();
+
+    // console.log(this.filterSkill);
   }
+
+  // console.log('before filter2 skill');
+  // console.log('after filter2 skill');
+
+  // if(this.filterSkill.length === 0){
+  //   this.filterApplied = false;
+  //   console.log("author reset");
+  // }
 }
 
 onFilterAuthorPush() {
   var data_filter = this.skill.filter(
-    element => element.name == this.filter_value_auth
+    element => element.author == this.filter_value_auth
   );
 
   for (var i = 0; i < data_filter.length; i++) {
-    this.filterSkill2.push(data_filter[i]);
+
+
+    if(this.filterSkill.length == 0){
+      this.filterSkill.push(data_filter[i]);
+      console.log("pushed");
+      console.log(this.filterSkill[i].id);
+    }
+    else{
+     if(this.filterSkill[i].name){
+
+     } else{
+
+     }
+    }
+
   }
-  console.log(this.filterSkill2);
+  // console.log("author ARRAY");
+  // console.log(this.filterSkill2);
 }
 
 
 onFilterAuthorPop() {
-  var data_filter_pop = this.filterSkill2.filter(
-    element => element.name == this.filter_value_auth
+  var data_filter_pop = this.filterSkill.filter(
+    element => element.author == this.filter_value_auth
   );
 
-  for (var i = 0; i<this.filterSkill2.length; i++) {
+  for (var i = 0; i<this.filterSkill.length; i++) {
     for (var j = 0; j < data_filter_pop.length; j++) {
-      
-      if(this.filterSkill2[i].id == data_filter_pop[j].id){
-        this.filterSkill2.splice(i,1);
-        console.log(this.filterSkill2);
+
+      if(this.filterSkill[i].id == data_filter_pop[j].id){
+        this.filterSkill.splice(i,1);
+        console.log(this.filterSkill);
         // console.log(data_filter_pop);
       }else{
         break;
@@ -232,21 +288,16 @@ onFilterAuthorPop() {
 }
 
 // Author filteration ends here
-
-
-
-
-
-
-
-  merged_array = [];
+mergedArray = this.skill;
   // merging array
-  filter_mergedarray() {
-    for (var i = 0; i < this.filterSkill.length; i++) {
-      this.merged_array.push(this.filterSkill[i]);
-    }
-    console.log(this.merged_array);
-  }
+  // filter_mergedarray() {
+
+  //   for (var i = 0; i < this.filterSkill.length; i++) {
+  //     this.mergedArray.push(this.filterSkill[i]);
+  //   }
+  //   console.log(this.mergedArray);
+
+  // }
 
   onUpdateSubjectName(event: Event) {
     this.subjectName_boolean = (<HTMLInputElement>event.target).checked;
