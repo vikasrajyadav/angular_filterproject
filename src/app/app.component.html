@@ -39,7 +39,7 @@
                     type="checkbox"
                     class="custom-control-input"
                     id="{{ subject.htmlId }}"
-                    (click)="onUpdateSubjectName($event); subjectName(subject);"
+                    (click)="onUpdateSubjectName($event); subjectName(subject)"
                   />
                   <label
                     class="custom-control-label"
@@ -74,7 +74,7 @@
                     type="checkbox"
                     class="custom-control-input"
                     id="{{ author.htmlId }}"
-                    (click)="onUpdateAuthorName($event); authorName(author)"
+                    (click)="authorName(author)"
                   />
                   <label
                     class="custom-control-label"
@@ -160,7 +160,6 @@
         </span>
       </li>
 
-
       <!-- Nav Item - Pages Collapse Menu -->
 
       <!-- Nav Item - Tables -->
@@ -190,7 +189,7 @@
             <button (click)="filter_mergedarray()">Filter</button>
             <div class="row">
               <div class="col-sm-4" *ngFor="let card of skill">
-                <div>{{card.name}}</div>
+                <div>{{ card.name }}</div>
               </div>
             </div>
           </div>
@@ -222,7 +221,8 @@
                     /></span>
                     <br /><br />
                     <strong>Author Name:</strong> {{ card.author }} <br />
-                    <strong>Subject ID</strong> {{ card.id }} <br/>                    <!-- <span class="border"
+                    <strong>Subject ID</strong> {{ card.id }} <br />
+                    <!-- <span class="border"
                         ><strong>Category: </strong> {{ card.category }}
                       </span>
                       <span class="border"
@@ -241,7 +241,6 @@
             </div>
 
             <hr />
-
 
             <div class="row" *ngIf="filterApplied">
               <div class="col-sm-4" *ngFor="let card of filterSkill">
@@ -263,7 +262,7 @@
                     /></span>
                     <br /><br />
                     <strong>Author Name:</strong> {{ card.author }} <br />
-                    <strong>Subject ID</strong> {{ card.id }} <br/>
+                    <strong>Subject ID</strong> {{ card.id }} <br />
                     <!-- <span class="border"
                           ><strong>Category: </strong> {{ card.category }}
                         </span>
@@ -282,8 +281,6 @@
               </div>
             </div>
           </div>
-
-
         </div>
         <!-- /.container-fluid -->
       </div>
@@ -302,5 +299,4 @@
     <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
-
 </body>
