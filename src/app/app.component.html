@@ -74,7 +74,7 @@
                     type="checkbox"
                     class="custom-control-input"
                     id="{{ author.htmlId }}"
-                    (click)="authorName(author)"
+                    (click)="onUpdateSubjectName($event); subjectName(author , 'author')"
                   />
                   <label
                     class="custom-control-label"
@@ -109,7 +109,7 @@
                     type="checkbox"
                     class="custom-control-input"
                     id="{{ level.htmlId }}"
-                    (click)="onUpdateServerName($event); CategoryName(level)"
+                    (click)="onUpdateSubjectName($event); subjectName(level , 'category')"
                   />
                   <label
                     class="custom-control-label"
@@ -142,9 +142,8 @@
                         type="checkbox"
                         class="custom-control-input"
                         id="{{ type.htmlId }}"
-                        (click)="
-                          onUpdateServerName($event); FileType_function(type)
-                        "
+                        (click)="onUpdateSubjectName($event); subjectName(type , 'file_type')"
+
                       />
                       <label
                         class="custom-control-label"

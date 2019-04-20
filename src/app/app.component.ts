@@ -129,13 +129,23 @@ export class AppComponent {
   fieldValue = ['name', 'Language', 'file_type'];
 
   filterData = {
-    Language: [],
+    // Language: [],
     // Language: ["English", "C++"],
-    name: [],
+    // name: [],
+    // author: [],
     // name: ['Business'],
-    file_type: [],
+    // file_type: [],
     // file_type: ['image'],
+    // category: [],
   };
+
+
+// filterData = {
+//     Language: 'English',
+//     name: 'Business',
+//     file_type: "video",
+//   };
+
 
   constructor() { }
 
@@ -150,15 +160,17 @@ export class AppComponent {
   filterSkill = [];
 
   // tslint:disable-next-line: member-ordering
-  sizeOfFilterData = Object.keys(this.filterData).length;
+  // sizeOfFilterData = Object.keys(this.filterData.name).length;
 
   // tslint:disable-next-line: variable-name
   filterDataObjectArrayCreation(filterData_CategoryNameForKey: any, FiltersubjectNameForArray: any) {
 
+    // console.log('Size', this.sizeOfFilterData);
+
     let dataValue = null;
     let flag = false;
-    let forLoopFlag = false;
-// tslint:disable-next-line: forin
+    // let forLoopFlag = false;
+    // tslint:disable-next-line: forin
     for (const key in this.filterData) {
       if (filterData_CategoryNameForKey === key) {
         flag = true;
@@ -167,22 +179,30 @@ export class AppComponent {
       } else {
         flag = false;
       }
-      forLoopFlag = true;
+      // forLoopFlag = true;
     }
 
-    if (forLoopFlag) {
-      // for (const key in this.filterData) {
-        if (!flag) {
-          Object.assign(this.filterData, { [filterData_CategoryNameForKey]: [] });
-        } else {
-          (this.filterData[dataValue]).push(FiltersubjectNameForArray);
-          console.log(this.filterData[dataValue]);
-          console.log('true');
-          // break;
-        }
-      // }
+    // if (forLoopFlag) {
+    // for (const key in this.filterData) {
+    if (!flag) {
+      Object.assign(this.filterData, { [filterData_CategoryNameForKey]: [] });
+      (this.filterData[filterData_CategoryNameForKey]).push(FiltersubjectNameForArray);
+      console.log(this.filterData);
+    } else {
+      (this.filterData[dataValue]).push(FiltersubjectNameForArray);
+      console.log(this.filterData[dataValue]);
+      console.log('true');
+      // break;
     }
-    return true;
+    console.log(this.filterData);
+    // }
+  }
+  //   return true;
+  // }
+
+  fieldValueCreatorFunction() {
+    const keys = Object.keys(this.filterData);
+    console.log(keys);
   }
 
 
@@ -195,6 +215,8 @@ export class AppComponent {
     // console.log(this.SubjectFilterArray);
 
     this.filterDataObjectArrayCreation(cat, subj.name);
+    this.fieldValueCreatorFunction();
+      this.onFilterSubjectPush();
 
     this.filterApplied = true;
 
@@ -276,6 +298,9 @@ export class AppComponent {
 
       for (const value of this.fieldValue) {
         console.log(value);
+        console.log(this.filterData[value]);
+        console.log(this.filterData[value].length);
+        // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < this.filterData[value].length; i++) {
           // console.log('filter value', filter[value][i]);
           if (data[value] === undefined || data[value] !== this.filterData[value][i]) {
@@ -334,6 +359,24 @@ export class AppComponent {
       }
     }
   }
+  // onFilterSubjectPop() {
+  //   var data_filter_pop = this.filterSkill.filter(
+  //     element => element.name == this.SubjectFilteredValue
+  //   );
+
+  //   for (var i = 0; i < this.filterSkill.length; i++) {
+  //     for (var j = 0; j < data_filter_pop.length; j++) {
+
+  //       if (this.filterSkill[i].id == data_filter_pop[j].id) {
+  //         this.filterSkill.splice(i, 1);
+  //         console.log(this.filterSkill);
+  //         // console.log(data_filter_pop);
+  //       } else {
+  //         break;
+  //       }
+  //     }
+  //   }
+  // }
 
   // subject filteration ends here
 
