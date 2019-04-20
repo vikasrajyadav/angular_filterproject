@@ -127,6 +127,16 @@ export class AppComponent {
   ];
 
   fieldValue = ['name', 'Language', 'file_type'];
+
+  filterData = {
+    Language: [],
+    // Language: ["English", "C++"],
+    name: [],
+    // name: ['Business'],
+    file_type: [],
+    // file_type: ['image'],
+  };
+
   constructor() { }
 
   // subject filteration starts here
@@ -139,12 +149,52 @@ export class AppComponent {
 
   filterSkill = [];
 
+  // tslint:disable-next-line: member-ordering
+  sizeOfFilterData = Object.keys(this.filterData).length;
+
+  // tslint:disable-next-line: variable-name
+  filterDataObjectArrayCreation(filterData_CategoryNameForKey: any, FiltersubjectNameForArray: any) {
+
+    let dataValue = null;
+    let flag = false;
+    let forLoopFlag = false;
+// tslint:disable-next-line: forin
+    for (const key in this.filterData) {
+      if (filterData_CategoryNameForKey === key) {
+        flag = true;
+        dataValue = key;
+        break;
+      } else {
+        flag = false;
+      }
+      forLoopFlag = true;
+    }
+
+    if (forLoopFlag) {
+      // for (const key in this.filterData) {
+        if (!flag) {
+          Object.assign(this.filterData, { [filterData_CategoryNameForKey]: [] });
+        } else {
+          (this.filterData[dataValue]).push(FiltersubjectNameForArray);
+          console.log(this.filterData[dataValue]);
+          console.log('true');
+          // break;
+        }
+      // }
+    }
+    return true;
+  }
+
+
+
   subjectName(subj, cat) {
     // console.log(subj.name);
     console.log(cat);
     this.SubjectFilterArray.push(subj.name);
     this.SubjectFilteredValue = subj.name;
     // console.log(this.SubjectFilterArray);
+
+    this.filterDataObjectArrayCreation(cat, subj.name);
 
     this.filterApplied = true;
 
@@ -166,7 +216,7 @@ export class AppComponent {
 
     if (this.filterSkill.length === 0) {
       this.filterApplied = false;
-      console.log("reset");
+      // console.log("reset");
     }
 
   }
@@ -183,11 +233,7 @@ export class AppComponent {
     //   file_type: "video",
     // };
 
-    const filter = {
-      Language: ["English", "C++"],
-      name: ['Business'],
-      file_type: ['image'],
-    };
+
 
     // const filter = [
     //   ['Language', 'English', 'hindi'],
@@ -230,9 +276,9 @@ export class AppComponent {
 
       for (const value of this.fieldValue) {
         console.log(value);
-        for (let i = 0; i < filter[value].length; i++) {
+        for (let i = 0; i < this.filterData[value].length; i++) {
           // console.log('filter value', filter[value][i]);
-          if (data[value] === undefined || data[value] !== filter[value][i]) {
+          if (data[value] === undefined || data[value] !== this.filterData[value][i]) {
             console.log('ifTrue');
           }
           else {
@@ -244,8 +290,8 @@ export class AppComponent {
       }
       console.log(data);
       // for (let valueCheck of this.fieldValue) {
-        if (objectSetter.name && objectSetter.Language && objectSetter.file_type) {
-          this.newArray.push(data);
+      if (objectSetter.name && objectSetter.Language && objectSetter.file_type) {
+        this.newArray.push(data);
         // }
       }
     }
