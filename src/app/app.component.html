@@ -103,17 +103,17 @@
               <div class="form-group">
                 <div
                   class="custom-control custom-checkbox small"
-                  *ngFor="let level of Level"
+                  *ngFor="let level of Level;let i=index"
                 >
                   <input
                     type="checkbox"
                     class="custom-control-input"
-                    id="{{ level.htmlId }}"
+                    id="level{{i}}"
                     (click)="onUpdateSubjectName($event); subjectName(level , 'category')"
                   />
                   <label
                     class="custom-control-label"
-                    for="{{ level.htmlId }}"
+                    for="level{{i}}"
                     >{{ level.name }}</label
                   >
                 </div>
@@ -185,7 +185,7 @@
           </div>
           <!-- Topbar Navbar -->
           <div class="container">
-            <button (click)="filter_mergedarray()">Filter</button>
+            <button (click)="onFilterSubjectPush()">Filter</button>
             <div class="row">
               <div class="col-sm-4" *ngFor="let card of skill">
                 <div>{{ card.name }}</div>

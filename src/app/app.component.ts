@@ -126,7 +126,8 @@ export class AppComponent {
     }
   ];
 
-  fieldValue = ['name', 'Language', 'file_type'];
+  // fieldValue = ['name', 'Language', 'file_type'];
+  fieldValue = [];
 
   filterData = {
     // Language: [],
@@ -201,8 +202,9 @@ export class AppComponent {
   // }
 
   fieldValueCreatorFunction() {
-    const keys = Object.keys(this.filterData);
-    console.log(keys);
+    // const keys = Object.keys(this.filterData);
+    this.fieldValue = Object.keys(this.filterData);
+    console.log(this.fieldValue);
   }
 
 
@@ -216,7 +218,7 @@ export class AppComponent {
 
     this.filterDataObjectArrayCreation(cat, subj.name);
     this.fieldValueCreatorFunction();
-      this.onFilterSubjectPush();
+      // this.onFilterSubjectPush();
 
     this.filterApplied = true;
 
@@ -313,7 +315,7 @@ export class AppComponent {
           }
         }
       }
-      console.log(data);
+      // console.log(data);
       // for (let valueCheck of this.fieldValue) {
       if (objectSetter.name && objectSetter.Language && objectSetter.file_type) {
         this.newArray.push(data);
