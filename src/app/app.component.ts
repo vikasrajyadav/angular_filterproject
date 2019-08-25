@@ -9,17 +9,11 @@ import { Subject } from 'rxjs';
 })
 export class AppComponent {
   title = 'demo-app';
-  // card_datas: card_data[] = [
-  //   new card_data(
-  //     'Maths','12 std mathematics','http://www.clipartroo.com/images/7/scientist-clipart-7718.png','tag 1','science','english','me','Image',
-  //   ),  new card_data(
-  //     'English','12 std english','http://www.clipartroo.com/images/7/scientist-clipart-7718.png','tag 2','Commerce','Hindi','you','Video',
-  //   ),
-  // ];
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   filterApplied: boolean = false;
+  // tslint:disable-next-line: member-ordering
   File_type = [
     { name: 'image', id: '1', htmlId: 'image1' },
     { name: 'video', id: '2', htmlId: 'video1' },
@@ -110,7 +104,7 @@ export class AppComponent {
       file_type: 'image',
       tag: ['tag-1', 'tag-2', 'tag-3'],
       imagePath: 'https://dummyimage.com/vga',
-      id: '6'
+      id: '6',
     },
     {
       name: 'Business',
@@ -141,15 +135,13 @@ export class AppComponent {
     // category: [],
   };
 
-
   // filterData = {
   //     Language: 'English',
   //     name: 'Business',
   //     file_type: "video",
   //   };
 
-
-  constructor() { }
+  constructor() {}
 
   // subject filteration starts here
   newArray = [];
@@ -161,7 +153,6 @@ export class AppComponent {
 
   filterSkill = [];
 
-
   /*
 
   After loading the screen
@@ -172,9 +163,11 @@ export class AppComponent {
 
   */
 
-  filterDataObjectArrayCreation(filterData_CategoryNameForKey: any, FiltersubjectNameForArray: any, checkboxStatus: boolean) {
-
-
+  filterDataObjectArrayCreation(
+    filterData_CategoryNameForKey: any,
+    FiltersubjectNameForArray: any,
+    checkboxStatus: boolean
+  ) {
     let dataValue = null;
     let flag = false;
     for (const key in this.filterData) {
@@ -189,26 +182,33 @@ export class AppComponent {
     if (checkboxStatus) {
       if (!flag) {
         Object.assign(this.filterData, { [filterData_CategoryNameForKey]: [] });
-        (this.filterData[filterData_CategoryNameForKey]).push(FiltersubjectNameForArray);
+        this.filterData[filterData_CategoryNameForKey].push(
+          FiltersubjectNameForArray
+        );
         // console.log('Filter data after insertion object with array checkbox', this.filterData);
       } else {
-        (this.filterData[dataValue]).push(FiltersubjectNameForArray);
+        this.filterData[dataValue].push(FiltersubjectNameForArray);
         // console.log('Filter data after insertion object with array checkbox', this.filterData[dataValue]);
         console.log('true');
       }
-      console.log('Filter data after insertion object with array checkbox', this.filterData);
+      console.log(
+        'Filter data after insertion object with array checkbox',
+        this.filterData
+      );
       // console.log(this.filterData);
     } else {
       for (let i = 0; i < this.filterData[dataValue].length; i++) {
         if (this.filterData[dataValue][i] === FiltersubjectNameForArray) {
           this.filterData[dataValue].splice(i, 1);
-          console.log('Filter data after Splicing object with array checkbox', this.filterData);
+          console.log(
+            'Filter data after Splicing object with array checkbox',
+            this.filterData
+          );
           console.log(this.filterData[dataValue]);
         }
       }
     }
   }
-
 
   objectSetter = {
     // name: false,
@@ -225,8 +225,6 @@ export class AppComponent {
     }
   }
 
-
-
   subjectName(subj, cat) {
     // console.log(subj.name);
     // console.log('Category name', cat);
@@ -234,7 +232,11 @@ export class AppComponent {
     this.SubjectFilteredValue = subj.name;
     // console.log(this.SubjectFilterArray);
 
-    this.filterDataObjectArrayCreation(cat, subj.name, this.SubjectName_CheckBoxedStatus);
+    this.filterDataObjectArrayCreation(
+      cat,
+      subj.name,
+      this.SubjectName_CheckBoxedStatus
+    );
     this.fieldValueCreatorFunction();
     this.onFilterSubjectPush();
 
@@ -250,19 +252,16 @@ export class AppComponent {
       // calling the function
       // deleting data from the array filterskill
       // this.onFilterSubjectPop();
-
     }
 
     if (this.filterSkill.length === 0) {
       this.filterApplied = false;
     }
-
   }
 
   onFilterSubjectPush() {
     this.newArray = [];
     for (const data of this.skill) {
-
       // objectSetter.name = false;
       // objectSetter.Language = false;
       // objectSetter.file_type = false;
@@ -274,10 +273,16 @@ export class AppComponent {
       for (const value of this.fieldValue) {
         console.log('Value', value);
         console.log('FilterData of particular value', this.filterData[value]);
-        console.log('Length of FilterData of particular value', this.filterData[value].length);
+        console.log(
+          'Length of FilterData of particular value',
+          this.filterData[value].length
+        );
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < this.filterData[value].length; i++) {
-          if (data[value] === undefined || data[value] !== this.filterData[value][i]) {
+          if (
+            data[value] === undefined ||
+            data[value] !== this.filterData[value][i]
+          ) {
             console.log('ifTrue');
           } else {
             console.log('ifFalse');
@@ -343,9 +348,6 @@ export class AppComponent {
     }
 
     console.log(this.newArray);
-
-
-
   }
 
   // onFilterSubjectPush() {
@@ -359,7 +361,6 @@ export class AppComponent {
   //   console.log(this.filterSkill);
   // }
 
-
   onFilterSubjectPop() {
     var data_filter_pop = this.filterSkill.filter(
       element => element.name == this.SubjectFilteredValue
@@ -367,7 +368,6 @@ export class AppComponent {
 
     for (var i = 0; i < this.filterSkill.length; i++) {
       for (var j = 0; j < data_filter_pop.length; j++) {
-
         if (this.filterSkill[i].id == data_filter_pop[j].id) {
           this.filterSkill.splice(i, 1);
           console.log(this.filterSkill);
@@ -399,12 +399,12 @@ export class AppComponent {
 
   // subject filteration ends here
 
-
   onUpdateSubjectName(event: Event) {
-    this.SubjectName_CheckBoxedStatus = (<HTMLInputElement>event.target).checked;
+    this.SubjectName_CheckBoxedStatus = (<HTMLInputElement>(
+      event.target
+    )).checked;
     console.log('Subject Name', this.SubjectName_CheckBoxedStatus);
   }
-
 
   // onUpdateAuthorName(event: Event) {
   //   this.authorName_boolean = (<HTMLInputElement>event.target).checked;
@@ -412,5 +412,4 @@ export class AppComponent {
   // }
 
   // function to push array in the filter skill
-
 }
